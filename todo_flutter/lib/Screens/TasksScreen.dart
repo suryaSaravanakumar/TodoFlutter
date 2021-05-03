@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todo_flutter/Widgets/TaskList.dart';
+import 'AddTaskScreen.dart';
 
 class TasksScreen extends StatelessWidget{
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -8,6 +11,12 @@ class TasksScreen extends StatelessWidget{
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
+        onPressed: (){
+          showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => AddTaskScreen());
+        },
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,11 +53,12 @@ class TasksScreen extends StatelessWidget{
             ,),
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(0),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))
               ),
+              child: TaskLists(),
             ),
           )
         ],
@@ -56,3 +66,6 @@ class TasksScreen extends StatelessWidget{
     );
   }
 }
+
+
+
