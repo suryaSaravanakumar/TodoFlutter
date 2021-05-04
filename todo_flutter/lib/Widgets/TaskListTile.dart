@@ -1,48 +1,30 @@
 import 'package:flutter/material.dart';
 
-class TaskTileCell extends StatefulWidget {
-  @override
-  _TaskTileCellState createState() => _TaskTileCellState();
-}
+class TaskTileCell extends StatelessWidget {
 
-class _TaskTileCellState extends State<TaskTileCell> {
-  var isChecked = false;
+  final bool isChecked;
+  final String taskTitle ;
+  final Function taskStatusChanged;
+  TaskTileCell({this.isChecked,this.taskTitle,this.taskStatusChanged});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-          'This is list view',
+        taskTitle,
         style: TextStyle(
           decoration: isChecked ? TextDecoration.lineThrough : null
         ),
       ),
-      trailing: TaskCheckBox(
-          checkBoxState: isChecked,
-          //This is call back function (like our baby closure)
-          checkBoxStateChanged: (bool newValue){
-            setState(() {
-              isChecked =  newValue;
-            });
-          }
-      ),
+      trailing: Checkbox(
+        activeColor: Colors.lightBlueAccent,
+        value: isChecked,
+        onChanged: taskStatusChanged,
+      )
     );
   }
 }
 
 
-class TaskCheckBox extends StatelessWidget {
-  final bool checkBoxState;
-  final Function checkBoxStateChanged;
 
- TaskCheckBox({this.checkBoxState, this.checkBoxStateChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    return  Checkbox(
-      value: checkBoxState,
-      onChanged: checkBoxStateChanged
-    );
-  }
-}
 
