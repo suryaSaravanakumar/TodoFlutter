@@ -20,5 +20,11 @@ class TaskDataProvider extends ChangeNotifier{
     tasks[currentIndex].isDone = newValue;
     notifyListeners();
   }
+
+  deleteTask({int currentIndex}){
+    print(currentIndex);
+    tasks.removeAt(currentIndex);
+    notifyListeners();
+  }
 }
 

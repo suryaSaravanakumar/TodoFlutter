@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:todo_flutter/Models/Task.dart';
+import 'package:todo_flutter/Models/TasksDataProvider.dart';
 
 class TaskTileCell extends StatelessWidget {
 
   final bool isChecked;
-  final String taskTitle ;
+  final Task task ;
   final Function taskStatusChanged;
-  TaskTileCell({this.isChecked,this.taskTitle,this.taskStatusChanged});
+  final Function onLongPressCallBack;
+  TaskTileCell({this.isChecked,this.task,this.taskStatusChanged,this.onLongPressCallBack});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        taskTitle,
+        task.name,
         style: TextStyle(
           decoration: isChecked ? TextDecoration.lineThrough : null
         ),
@@ -20,9 +25,12 @@ class TaskTileCell extends StatelessWidget {
         activeColor: Colors.lightBlueAccent,
         value: isChecked,
         onChanged: taskStatusChanged,
-      )
+      ),
+      onLongPress: onLongPressCallBack,
     );
   }
+
+
 }
 
 
